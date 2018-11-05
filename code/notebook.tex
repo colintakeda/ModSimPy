@@ -1,0 +1,1101 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Project 2 - Popping Popcorn vFinal}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{project-2---popping-popcorn}{%
+\section{Project 2 - Popping
+Popcorn}\label{project-2---popping-popcorn}}
+
+    By Aditya Sudhakar and Colin Takeda
+
+    \hypertarget{question}{%
+\subsection{\#\# Question}\label{question}}
+
+    When is the optimal time to stop cooking popcorn given a specific
+surface area to volume ratio to maximize edible yield.
+
+    \hypertarget{methodology}{%
+\subsection{\#\# Methodology}\label{methodology}}
+
+    First, we related the specific heat equation and the thermal
+conducitivity equation to find the change in temperature at each layer
+of the popcorn kernels. We know the ideal popping temperature of popcorn
+kernels to be 180 degrees Celcius. We approximated a popping rate for
+each kernel as there are expected to be duds.
+
+Next, we will create a model that has a surface area of 0.314 m2 and we
+will change the volume of the popcorn kernels with additional layers.
+Each layer will have exactly 50 kernels. We will apply our derived
+change in temperature equation for each individual layer in conjunction
+with our pop rate to find the total number of unpopped, popped, and
+burnt kernels over time.
+
+Assumptions: - Conduction only for the first layer - Convection was
+approximated to 0.3 to account for humidity inside the pan - Pan starts
+at 232.2 degrees Celcius - The outside rim of the constraining cylinder
+does not affect cross sectional area - Ignore oil temperature's effect
+on the system - The thermal conducivity of rice (.031 w/mk) is similar
+to that of a popcorn kernel as they are both hard starches - Kernels are
+not changing layers at any time. - Layers pop discretely
+
+These assumptions for the most part are used to simplify the model and
+the different factors that affect the system. While these assumptions
+take away from the model's accuracy, we were able to focus more on the
+sources of heat that most directly affected the kernel's temperature.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}figures appear in notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        
+        \PY{o}{\PYZpc{}}\PY{k}{config} InteractiveShell.ast\PYZus{}node\PYZus{}interactivity=\PYZsq{}last\PYZus{}expr\PYZus{}or\PYZus{}assign\PYZsq{}
+        
+        \PY{c+c1}{\PYZsh{}import modsim functions}
+        \PY{k+kn}{from} \PY{n+nn}{modsim} \PY{k}{import} \PY{o}{*}  
+        \PY{k+kn}{from} \PY{n+nn}{pandas} \PY{k}{import} \PY{n}{read\PYZus{}html} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{system} \PY{o}{=} \PY{n}{System}\PY{p}{(}\PY{n}{t\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                        \PY{n}{t\PYZus{}final} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{,}  \PY{c+c1}{\PYZsh{}Number of time steps}
+                        
+                        \PY{n}{pop\PYZus{}c} \PY{o}{=} \PY{l+m+mf}{1.510}\PY{p}{,}   \PY{c+c1}{\PYZsh{}Specific heat of popcorn kernel (J/K)}
+                        \PY{n}{al\PYZus{}c} \PY{o}{=} \PY{l+m+mf}{0.900}\PY{p}{,}    \PY{c+c1}{\PYZsh{}Specific heat of aluminum pan   (J/K)}
+                        
+                        \PY{n}{pop\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{c+c1}{\PYZsh{}Rate from experimental testing}
+                        
+                        \PY{n}{pop\PYZus{}sa} \PY{o}{=} \PY{l+m+mf}{0.0314}\PY{p}{,} \PY{c+c1}{\PYZsh{}Surface area of kernels touching pan (m\PYZca{}2)}
+                        \PY{n}{pop\PYZus{}vol} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}    \PY{c+c1}{\PYZsh{}Volume of the all kernels (cm\PYZca{}3)}
+                        \PY{n}{pop\PYZus{}m} \PY{o}{=} \PY{l+m+mi}{10}\PY{o}{*}\PY{l+m+mf}{1.05}\PY{p}{,} \PY{c+c1}{\PYZsh{}Mass of kernels in one layer (g)}
+                        
+                        \PY{n}{deltat} \PY{o}{=} \PY{l+m+mf}{209.2}\PY{p}{,}  \PY{c+c1}{\PYZsh{}Change in temperature of popcorn kernels (C)}
+                        
+                        \PY{n}{al\PYZus{}k} \PY{o}{=} \PY{l+m+mf}{2.05}\PY{p}{,}     \PY{c+c1}{\PYZsh{}Conductivity of aluminum pan (w/mk)}
+                        \PY{n}{pop\PYZus{}k} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{031}\PY{p}{,}    \PY{c+c1}{\PYZsh{}Conductivity of rice (w/mk)}
+                        
+                        \PY{n}{al\PYZus{}d} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{75}\PY{p}{,}      \PY{c+c1}{\PYZsh{}Thickness of pan (cm)}
+                       
+                        \PY{n}{layers} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,}
+                        \PY{n}{kernelsperlayer} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}  
+                        
+        
+        \PY{n}{state} \PY{o}{=} \PY{n}{State}\PY{p}{(}\PY{n}{kernels} \PY{o}{=} \PY{n}{system}\PY{o}{.}\PY{n}{kernelsperlayer} \PY{o}{*} \PY{n}{system}\PY{o}{.}\PY{n}{layers}\PY{p}{,} \PY{c+c1}{\PYZsh{}Starting number of kernels}
+                      \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{unpopped} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{burnt} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{c+c1}{\PYZsh{}number of kernels in each layer}
+                      \PY{n}{layer1\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer2\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer3\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer4\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer5\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer6\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer7\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      \PY{n}{layer8\PYZus{}pop} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                      
+                      \PY{c+c1}{\PYZsh{}keeps track of temperature of individual layers}
+                      \PY{n}{al\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer2\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer3\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer4\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer5\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer6\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer7\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      \PY{n}{layer8\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{23.}\PY{p}{,}
+                      
+                      \PY{c+c1}{\PYZsh{}counters for keeping track of when a layer burns}
+                      \PY{n}{counter1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter2} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter3} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter4} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter5} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter6} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter7} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      \PY{n}{counter8} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}
+                      
+                     \PY{p}{)}
+        \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{temp\PYZus{}change}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{dp} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}layer 1}
+            
+            \PY{c+c1}{\PYZsh{}teat transfer equation \PYZhy{} this is the only layer which uses only conduction}
+            \PY{n}{dtemp} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{al\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{n}{deltat}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{al\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{al\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{al\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+             
+            \PY{c+c1}{\PYZsh{}keeps track of when the popcorn is popping \PYZhy{} counter value is updated to know when a layer burns}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{al\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter1} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{c+c1}{\PYZsh{}slightly random chance of popcorn popping when a layer reaches optimal popping temperature}
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer1\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+                            
+                    \PY{c+c1}{\PYZsh{}updating state variables        }
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer1\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+                            
+            \PY{c+c1}{\PYZsh{}burn function}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter1} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter1} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}
+                
+                
+                
+            \PY{c+c1}{\PYZsh{}layer 2}
+            
+            \PY{c+c1}{\PYZsh{}every other layer is the same as the first, except they also include convection as part of the temperature change over time}
+            \PY{n}{dtemp2} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{al\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{al\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp2}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+        
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter2} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter2} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter2} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}
+                
+                
+                
+            \PY{c+c1}{\PYZsh{}layer 3    }
+            \PY{n}{dtemp3} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer2\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp3}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+                
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter3} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter3} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter3} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}
+                
+                
+                
+            \PY{c+c1}{\PYZsh{}layer 4   }
+            \PY{n}{dtemp4} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer3\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp4}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+                
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter4} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter4} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter4} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}   
+                
+                
+         
+        
+            \PY{c+c1}{\PYZsh{}layer 5 }
+            \PY{n}{dtemp5} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer4\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp5}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+                
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter5} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+               
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter5} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter5} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}     
+                    
+                    
+                    
+            \PY{c+c1}{\PYZsh{}layer 6}
+            \PY{n}{dtemp6} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer5\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp6}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+                
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter6} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter6} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter6} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}
+                
+                
+                
+            \PY{c+c1}{\PYZsh{}layer 7}
+            \PY{n}{dtemp7} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer6\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp7}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+                
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter7} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter7} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter7} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}
+            
+            
+            
+            \PY{c+c1}{\PYZsh{}layer 8}
+            \PY{n}{dtemp8} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{pop\PYZus{}k}\PY{o}{*}\PY{p}{(}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}temp}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{al\PYZus{}d}\PY{o}{*}\PY{n}{pop\PYZus{}m}\PY{o}{*}\PY{n}{pop\PYZus{}c}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{o}{.}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{pop\PYZus{}sa}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{layer7\PYZus{}temp}\PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            \PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}temp} \PY{o}{+}\PY{o}{=} \PY{n}{dtemp8}
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{232.2}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}temp} \PY{o}{=} \PY{l+m+mf}{232.2}
+                
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}temp} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{180}\PY{p}{:}
+                \PY{n}{state}\PY{o}{.}\PY{n}{counter8} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                
+                \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}pop} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{popped} \PY{o}{=} \PY{l+m+mi}{0}
+                    \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}   
+                        \PY{k}{if} \PY{n}{flip}\PY{p}{(}\PY{n}{pop\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{n}{dp} \PY{o}{=} \PY{n}{popped}
+        
+                    \PY{n}{state}\PY{o}{.}\PY{n}{layer8\PYZus{}pop} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{kernels} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{10}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{dp}\PY{p}{)}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{unpopped} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{10} \PY{o}{\PYZhy{}} \PY{n}{dp}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{k}{if} \PY{n}{state}\PY{o}{.}\PY{n}{counter8} \PY{o}{==} \PY{l+m+mi}{120} \PY{o+ow}{and} \PY{n}{state}\PY{o}{.}\PY{n}{counter8} \PY{o}{\PYZlt{}}\PY{l+m+mi}{121}\PY{p}{:}
+                \PY{n}{change} \PY{o}{=} \PY{l+m+mi}{7}
+                \PY{n}{state}\PY{o}{.}\PY{n}{popped} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{change}
+                \PY{n}{state}\PY{o}{.}\PY{n}{burnt} \PY{o}{+}\PY{o}{=} \PY{n}{change}
+        
+            
+            \PY{k}{return} \PY{n}{state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{temp\PYZus{}change}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{unpack}\PY{p}{(}\PY{n}{system}\PY{p}{)}
+            
+            \PY{n}{frame} \PY{o}{=} \PY{n}{TimeFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{state}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+            \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t\PYZus{}0}\PY{p}{]} \PY{o}{=} \PY{n}{state}
+            
+            \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{linrange}\PY{p}{(}\PY{n}{t\PYZus{}0}\PY{p}{,} \PY{n}{t\PYZus{}final}\PY{p}{)}\PY{p}{:}
+                \PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{temp\PYZus{}change}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{row}\PY{p}{[}\PY{n}{t}\PY{p}{]}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{system}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{frame}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{results} \PY{o}{=} \PY{n}{run\PYZus{}simulation}\PY{p}{(}\PY{n}{system}\PY{p}{,} \PY{n}{temp\PYZus{}change}\PY{p}{)}
+        \PY{n}{results}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}         kernels  popped  unpopped  burnt  layer1\_pop  layer2\_pop  layer3\_pop  \textbackslash{}
+        0.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        1.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        2.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        3.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        4.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        5.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        6.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        7.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        8.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        9.0        80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        10.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        11.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        12.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        13.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        14.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        15.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        16.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        17.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        18.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        19.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        20.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        21.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        22.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        23.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        24.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        25.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        26.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        27.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        28.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        29.0       80.0     0.0       0.0    0.0        10.0        10.0        10.0   
+        {\ldots}         {\ldots}     {\ldots}       {\ldots}    {\ldots}         {\ldots}         {\ldots}         {\ldots}   
+        971.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        972.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        973.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        974.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        975.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        976.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        977.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        978.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        979.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        980.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        981.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        982.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        983.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        984.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        985.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        986.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        987.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        988.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        989.0      10.0    23.0       5.0   42.0         0.0         0.0         0.0   
+        990.0       0.0    33.0       5.0   42.0         0.0         0.0         0.0   
+        991.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        992.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        993.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        994.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        995.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        996.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        997.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        998.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        999.0       0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        1000.0      0.0    26.0       5.0   49.0         0.0         0.0         0.0   
+        
+                layer4\_pop  layer5\_pop  layer6\_pop    {\ldots}     layer7\_temp  \textbackslash{}
+        0.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        1.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        2.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        3.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        4.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        5.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        6.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        7.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        8.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        9.0           10.0        10.0        10.0    {\ldots}       23.000000   
+        10.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        11.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        12.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        13.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        14.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        15.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        16.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        17.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        18.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        19.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        20.0          10.0        10.0        10.0    {\ldots}       23.000000   
+        21.0          10.0        10.0        10.0    {\ldots}       23.000001   
+        22.0          10.0        10.0        10.0    {\ldots}       23.000001   
+        23.0          10.0        10.0        10.0    {\ldots}       23.000001   
+        24.0          10.0        10.0        10.0    {\ldots}       23.000001   
+        25.0          10.0        10.0        10.0    {\ldots}       23.000002   
+        26.0          10.0        10.0        10.0    {\ldots}       23.000002   
+        27.0          10.0        10.0        10.0    {\ldots}       23.000003   
+        28.0          10.0        10.0        10.0    {\ldots}       23.000004   
+        29.0          10.0        10.0        10.0    {\ldots}       23.000005   
+        {\ldots}            {\ldots}         {\ldots}         {\ldots}    {\ldots}             {\ldots}   
+        971.0          0.0         0.0         0.0    {\ldots}      198.724540   
+        972.0          0.0         0.0         0.0    {\ldots}      198.881533   
+        973.0          0.0         0.0         0.0    {\ldots}      199.037932   
+        974.0          0.0         0.0         0.0    {\ldots}      199.193738   
+        975.0          0.0         0.0         0.0    {\ldots}      199.348952   
+        976.0          0.0         0.0         0.0    {\ldots}      199.503576   
+        977.0          0.0         0.0         0.0    {\ldots}      199.657611   
+        978.0          0.0         0.0         0.0    {\ldots}      199.811058   
+        979.0          0.0         0.0         0.0    {\ldots}      199.963918   
+        980.0          0.0         0.0         0.0    {\ldots}      200.116193   
+        981.0          0.0         0.0         0.0    {\ldots}      200.267884   
+        982.0          0.0         0.0         0.0    {\ldots}      200.418992   
+        983.0          0.0         0.0         0.0    {\ldots}      200.569518   
+        984.0          0.0         0.0         0.0    {\ldots}      200.719465   
+        985.0          0.0         0.0         0.0    {\ldots}      200.868832   
+        986.0          0.0         0.0         0.0    {\ldots}      201.017621   
+        987.0          0.0         0.0         0.0    {\ldots}      201.165835   
+        988.0          0.0         0.0         0.0    {\ldots}      201.313473   
+        989.0          0.0         0.0         0.0    {\ldots}      201.460537   
+        990.0          0.0         0.0         0.0    {\ldots}      201.607029   
+        991.0          0.0         0.0         0.0    {\ldots}      201.752949   
+        992.0          0.0         0.0         0.0    {\ldots}      201.898300   
+        993.0          0.0         0.0         0.0    {\ldots}      202.043082   
+        994.0          0.0         0.0         0.0    {\ldots}      202.187297   
+        995.0          0.0         0.0         0.0    {\ldots}      202.330946   
+        996.0          0.0         0.0         0.0    {\ldots}      202.474031   
+        997.0          0.0         0.0         0.0    {\ldots}      202.616552   
+        998.0          0.0         0.0         0.0    {\ldots}      202.758511   
+        999.0          0.0         0.0         0.0    {\ldots}      202.899910   
+        1000.0         0.0         0.0         0.0    {\ldots}      203.040750   
+        
+                layer8\_temp  counter1  counter2  counter3  counter4  counter5  \textbackslash{}
+        0.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        1.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        2.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        3.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        4.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        5.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        6.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        7.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        8.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        9.0       23.000000       0.0       0.0       0.0       0.0       0.0   
+        10.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        11.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        12.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        13.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        14.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        15.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        16.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        17.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        18.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        19.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        20.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        21.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        22.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        23.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        24.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        25.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        26.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        27.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        28.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        29.0      23.000000       0.0       0.0       0.0       0.0       0.0   
+        {\ldots}             {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}   
+        971.0    176.004839     833.0     721.0     589.0     463.0     340.0   
+        972.0    176.222210     834.0     722.0     590.0     464.0     341.0   
+        973.0    176.439002     835.0     723.0     591.0     465.0     342.0   
+        974.0    176.655214     836.0     724.0     592.0     466.0     343.0   
+        975.0    176.870847     837.0     725.0     593.0     467.0     344.0   
+        976.0    177.085900     838.0     726.0     594.0     468.0     345.0   
+        977.0    177.300373     839.0     727.0     595.0     469.0     346.0   
+        978.0    177.514266     840.0     728.0     596.0     470.0     347.0   
+        979.0    177.727580     841.0     729.0     597.0     471.0     348.0   
+        980.0    177.940313     842.0     730.0     598.0     472.0     349.0   
+        981.0    178.152467     843.0     731.0     599.0     473.0     350.0   
+        982.0    178.364040     844.0     732.0     600.0     474.0     351.0   
+        983.0    178.575033     845.0     733.0     601.0     475.0     352.0   
+        984.0    178.785447     846.0     734.0     602.0     476.0     353.0   
+        985.0    178.995280     847.0     735.0     603.0     477.0     354.0   
+        986.0    179.204533     848.0     736.0     604.0     478.0     355.0   
+        987.0    179.413206     849.0     737.0     605.0     479.0     356.0   
+        988.0    179.621299     850.0     738.0     606.0     480.0     357.0   
+        989.0    179.828813     851.0     739.0     607.0     481.0     358.0   
+        990.0    180.035746     852.0     740.0     608.0     482.0     359.0   
+        991.0    180.242100     853.0     741.0     609.0     483.0     360.0   
+        992.0    180.447874     854.0     742.0     610.0     484.0     361.0   
+        993.0    180.653069     855.0     743.0     611.0     485.0     362.0   
+        994.0    180.857684     856.0     744.0     612.0     486.0     363.0   
+        995.0    181.061720     857.0     745.0     613.0     487.0     364.0   
+        996.0    181.265177     858.0     746.0     614.0     488.0     365.0   
+        997.0    181.468054     859.0     747.0     615.0     489.0     366.0   
+        998.0    181.670353     860.0     748.0     616.0     490.0     367.0   
+        999.0    181.872074     861.0     749.0     617.0     491.0     368.0   
+        1000.0   182.073215     862.0     750.0     618.0     492.0     369.0   
+        
+                counter6  counter7  counter8  
+        0.0          0.0       0.0       0.0  
+        1.0          0.0       0.0       0.0  
+        2.0          0.0       0.0       0.0  
+        3.0          0.0       0.0       0.0  
+        4.0          0.0       0.0       0.0  
+        5.0          0.0       0.0       0.0  
+        6.0          0.0       0.0       0.0  
+        7.0          0.0       0.0       0.0  
+        8.0          0.0       0.0       0.0  
+        9.0          0.0       0.0       0.0  
+        10.0         0.0       0.0       0.0  
+        11.0         0.0       0.0       0.0  
+        12.0         0.0       0.0       0.0  
+        13.0         0.0       0.0       0.0  
+        14.0         0.0       0.0       0.0  
+        15.0         0.0       0.0       0.0  
+        16.0         0.0       0.0       0.0  
+        17.0         0.0       0.0       0.0  
+        18.0         0.0       0.0       0.0  
+        19.0         0.0       0.0       0.0  
+        20.0         0.0       0.0       0.0  
+        21.0         0.0       0.0       0.0  
+        22.0         0.0       0.0       0.0  
+        23.0         0.0       0.0       0.0  
+        24.0         0.0       0.0       0.0  
+        25.0         0.0       0.0       0.0  
+        26.0         0.0       0.0       0.0  
+        27.0         0.0       0.0       0.0  
+        28.0         0.0       0.0       0.0  
+        29.0         0.0       0.0       0.0  
+        {\ldots}          {\ldots}       {\ldots}       {\ldots}  
+        971.0      219.0     100.0       0.0  
+        972.0      220.0     101.0       0.0  
+        973.0      221.0     102.0       0.0  
+        974.0      222.0     103.0       0.0  
+        975.0      223.0     104.0       0.0  
+        976.0      224.0     105.0       0.0  
+        977.0      225.0     106.0       0.0  
+        978.0      226.0     107.0       0.0  
+        979.0      227.0     108.0       0.0  
+        980.0      228.0     109.0       0.0  
+        981.0      229.0     110.0       0.0  
+        982.0      230.0     111.0       0.0  
+        983.0      231.0     112.0       0.0  
+        984.0      232.0     113.0       0.0  
+        985.0      233.0     114.0       0.0  
+        986.0      234.0     115.0       0.0  
+        987.0      235.0     116.0       0.0  
+        988.0      236.0     117.0       0.0  
+        989.0      237.0     118.0       0.0  
+        990.0      238.0     119.0       1.0  
+        991.0      239.0     120.0       2.0  
+        992.0      240.0     121.0       3.0  
+        993.0      241.0     122.0       4.0  
+        994.0      242.0     123.0       5.0  
+        995.0      243.0     124.0       6.0  
+        996.0      244.0     125.0       7.0  
+        997.0      245.0     126.0       8.0  
+        998.0      246.0     127.0       9.0  
+        999.0      247.0     128.0      10.0  
+        1000.0     248.0     129.0      11.0  
+        
+        [1001 rows x 28 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}results}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{e}\PY{p}{,} \PY{n}{f}\PY{p}{,} \PY{n}{g}\PY{p}{,} \PY{n}{h}\PY{p}{)}\PY{p}{:}
+        
+            \PY{n}{plot}\PY{p}{(}\PY{n}{h}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}FF0000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}FF7F00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}00FF00}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}0000FF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{e}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}4B0082}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}9400D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{g}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Layer 8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+            
+            \PY{n}{decorate}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Change in Layer Temperature Over Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (seconds)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature (C)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                    \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}results2}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{n}{d}\PY{p}{)}\PY{p}{:}
+        
+            \PY{n}{plot}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kernels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{b}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Popped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unpopped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plot}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Burnt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{decorate}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Change in Popcorn Types Over Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (seconds)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Popcorn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{layer2\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{layer3\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{layer4\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{layer5\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{layer6\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{layer7\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{layer8\PYZus{}temp}\PY{p}{,}
+                     \PY{n}{results}\PY{o}{.}\PY{n}{al\PYZus{}temp}
+                    \PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.lines.Line2D at 0x259f7b886d8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plot\PYZus{}results2}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{kernels}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{popped}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{unpopped}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{burnt}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <matplotlib.lines.Line2D at 0x259f8074438>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{results}{%
+\subsection{\#\# Results}\label{results}}
+
+    The final graphs from our test show each layer's change in temperature
+over time graph and the change in the in the number of each popcorn type
+over time. As expected the first layer has the steepest change in
+temperature over time as it is the only layer heated through conduction
+from the aluminum pan. The other layers are heated through conduction
+from other kernels and air convection.
+
+\textbf{Answer} - The optimal time to maximize edible yield is 250
+seconds. At this time one would have the largest yield of popped popcorn
+with no burnt kernels.
+
+    \hypertarget{interpretation}{%
+\subsection{\#\# Interpretation}\label{interpretation}}
+
+    The final results for our data enables the user to choose a specific
+time allotment and then find the expected number of resulting kernels
+for this specific simulation. This information is beneficial to both the
+mundane popcorn user and industry experts (i.e.~movie theaters). While
+constrained by the current surface area to volume ratio, the code for
+this model could be adapted to sweep multiple combinations to find
+different resulting yields.
+
+We made several changes during the iteration of our model. Originally,
+our final model provided only bar graphs of the final popcorn types'
+values. This graph proved to have little insight as it lacked a specific
+time at which one could maximize edible yield. Also, this model only
+really applied a pop rate probability to the inital kernel stock and
+then updated the other kernel types.
+
+The final values for the code does not directly match reality. The
+biggest flaw of our model is that each layer is treated as one discrete
+unit. The only time other layers affect an individual layer is when
+accounting for temperature change. One major limitation is that
+everything is hardcoded, therefore it would be difficult to test for
+other conditions. At this moment, only a set surface area to volume is
+used versus our initial idea to test multiple different ratios.
+
+    \hypertarget{validation}{%
+\subsection{Validation}\label{validation}}
+
+    During our testing we found that there are considerablely less burnt
+popcorn than the model would suggest. Also, the individual layers heat
+faster than expected and there are more unpopped kernels under the
+similar conditions.
+
+    \hypertarget{abstract}{%
+\subsection{\#\# Abstract}\label{abstract}}
+
+    \textbf{Question} - When is the optimal time to stop cooking popcorn
+given a specific surface area to volume ratio to maximize edible yield.
+
+\textbf{Answer} - The optimal time to maximize edible yield is 250
+seconds. At this time one would have the largest yield of popped popcorn
+with no burnt kernels.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{layer2\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{layer3\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{layer4\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{layer5\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{layer6\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{layer7\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{layer8\PYZus{}temp}\PY{p}{,}
+                      \PY{n}{results}\PY{o}{.}\PY{n}{al\PYZus{}temp}
+                     \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} <matplotlib.lines.Line2D at 0x259f80027b8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{plot\PYZus{}results2}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{kernels}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{popped}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{unpopped}\PY{p}{,} \PY{n}{results}\PY{o}{.}\PY{n}{burnt}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <matplotlib.lines.Line2D at 0x259f80f7c18>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It is only worthwhile to keep popcorn in the pot for a short time as
+this will minimize the amount of kernels that are burnt. Also, having
+multiple layers doesn't add value as it allows the bottom layers to
+burn.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
